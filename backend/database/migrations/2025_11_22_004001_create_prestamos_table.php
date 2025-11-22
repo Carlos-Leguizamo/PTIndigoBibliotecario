@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prestamos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+       Schema::create('prestamos', function (Blueprint $table) {
+         $table->uuid('id')->primary();
+         $table->string('isbn');
+         $table->string('identificacionUsuario', 10);
+         $table->unsignedTinyInteger('tipoUsuario');
+         $table->date('fechaMaximaDevolucion');
+         $table->timestamps();
+       });
     }
 
     /**
