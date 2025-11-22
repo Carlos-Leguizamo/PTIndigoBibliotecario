@@ -5,23 +5,49 @@ use App\Http\Requests\PrestamoRequest;
 use App\Domain\Services\PrestamoService;
 use Illuminate\Http\Request;
 
-class PrestamoController extends Controller {
-  public function __construct(private PrestamoService $service) {}
+class PrestamoController extends Controller
+{
+    public function __construct(private PrestamoService $service) {}
 
-  public function store(PrestamoRequest $request) {
-    $prestamo = $this->service->crearPrestamo($request->validated());
-    return response()->json(['id'=>$prestamo->id,'fechaMaximaDevolucion'=>$prestamo->fechaMaximaDevolucion], 201);
-  }
+    public function store(PrestamoRequest $request)
+    {
+        try {
+            $loan = $this->service->createLoan($request->validated());
+            return response()->json([
+                'id' => $loan->id,
+                'returnDate' => $loan->fechaMaximaDevolucion
+            ], 201);
+        } catch (\Illuminate\Http\Exceptions\HttpResponseException $e) {
+            return $e->getResponse();
+        } catch (\Exception $e) {
+            return response()->json(['mensaje' => 'Datos de entrada no permitidos.'], 400);
+        }
+    }
 
-  public function show($id) {
-    $p = $this->service->obtenerPrestamo($id);
-    if (!$p) return response()->json(['mensaje'=>'El préstamo no existe'], 404);
-    return response()->json([
-      'id'=>$p->id,
-      'isbn'=>$p->isbn,
-      'identificacionUsuario'=>$p->identificacionUsuario,
-      'tipoUsuario'=>$p->tipoUsuario,
-      'fechaMaximaDevolucion'=>$p->fechaMaximaDevolucion,
-    ]);
-  }
+    public function show($id)
+    {
+        $loan = $this->service->getLoan($id);
+        if (!$loan) {
+            return response()->json(['mensaje' => 'El préstamo no existe'], 404);
+        }
+        return response()->json([
+            'id' => $loan->id,
+            'isbn' => $loan->isbn,
+            'userId' => $loan->identificacionUsuario,
+            'userType' => $loan->tipoUsuario,
+            'returnDate' => $loan->fechaMaximaDevolucion,
+        ]);
+    }
+
+    public function index()
+    {
+        $loans = $this->service->getAllLoans();
+        return response()->json($loans);
+    }
+
+    public function byUser($id)
+    {
+        $loans = $this->service->getLoansByUser($id);
+        return response()->json($loans);
+    }
 }

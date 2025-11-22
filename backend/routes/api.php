@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\Api\AuthController;
-
 use App\Http\Controllers\Api\RegisterController;
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -18,4 +17,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/prestamo', [PrestamoController::class, 'store']);
     Route::get('/prestamo/{id}', [PrestamoController::class, 'show']);
+    Route::get('/prestamos/list', [PrestamoController::class, 'index']);
+    Route::get('/prestamos/list/{id}', [PrestamoController::class, 'porUsuario']);
 });
