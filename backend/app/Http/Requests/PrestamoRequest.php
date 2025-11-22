@@ -27,4 +27,17 @@ class PrestamoRequest extends FormRequest
             'tipoUsuario' => 'required|integer|in:1,2,3'
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'isbn.required' => 'El campo ISBN es obligatorio.',
+            'isbn.string' => 'El campo ISBN debe ser una cadena de texto.',
+            'identificacionUsuario.required' => 'La identificación del usuario es obligatoria.',
+            'identificacionUsuario.alpha_num' => 'La identificación del usuario debe ser alfanumérica.',
+            'identificacionUsuario.max' => 'La identificación del usuario no debe superar los 10 caracteres.',
+            'tipoUsuario.required' => 'El tipo de usuario es obligatorio.',
+            'tipoUsuario.integer' => 'El tipo de usuario debe ser un número.',
+            'tipoUsuario.in' => 'El tipo de usuario debe ser 1, 2 o 3.'
+        ];
+    }
 }

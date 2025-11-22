@@ -11,7 +11,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(
+            \App\Domain\Repositories\PrestamoRepositoryInterface::class,
+            \App\Infrastructure\Repositories\PrestamoRepository::class
+        );
     }
 
     /**
