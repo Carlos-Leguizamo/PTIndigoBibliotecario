@@ -11,7 +11,7 @@ class PrestamoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,10 @@ class PrestamoRequest extends FormRequest
      */
     public function rules(): array
     {
-       return [
-         'isbn' => 'required|string',
-         'identificacionUsuario' => 'required|alpha_num|max:10',
-         'tipoUsuario' => 'required|integer|in:1,2,3'
-       ];
+        return [
+            'isbn' => 'required|string',
+            'identificacionUsuario' => 'required|alpha_num|max:10',
+            'tipoUsuario' => 'required|integer|in:1,2,3'
+        ];
     }
 }
