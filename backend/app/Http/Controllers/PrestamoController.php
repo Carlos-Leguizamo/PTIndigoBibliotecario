@@ -33,9 +33,9 @@ class PrestamoController extends Controller
         return response()->json([
             'id' => $loan->id,
             'isbn' => $loan->isbn,
-            'userId' => $loan->identificacionUsuario,
-            'userType' => $loan->tipoUsuario,
-            'returnDate' => $loan->fechaMaximaDevolucion,
+            'identificacionUsuario' => $loan->identificacionUsuario,
+            'tipoUsuario' => $loan->tipoUsuario,
+            'fechaMaximaDevolucion' => $loan->fechaMaximaDevolucion,
         ]);
     }
 
