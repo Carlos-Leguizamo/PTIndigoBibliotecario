@@ -6,3 +6,7 @@ export const crearPrestamo = (data) => {
 export const obtenerPrestamo = (id) => {
   return api.get(`/prestamo/${id}`);
 };
+
+export const obtenerListadoPrestamos = () => {
+  return api.get("prestamos/list");
+}
