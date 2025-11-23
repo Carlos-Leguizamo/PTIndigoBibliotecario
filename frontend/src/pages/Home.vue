@@ -1,6 +1,6 @@
 <template>
   <div class="container text-center mt-5">
-    <img src="/vite.svg" alt="Logo" width="120" class="mb-4" />
+    <i class="pi pi-book mb-4" style="font-size: 120px; color: #0d6efd;"></i>
 
     <h1 class="display-4 mb-3">Bienvenido a la Biblioteca Virtual</h1>
     <p class="lead mb-4">
